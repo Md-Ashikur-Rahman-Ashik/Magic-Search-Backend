@@ -31,7 +31,13 @@ async function run() {
 
     // Car related api's
     app.get("/cars", async (req, res) => {
-      const cursor = carCollection.find();
+      const page = parseInt(req.query.page);
+      const size = parseInt(req.query.size);
+      // console.log(page, size);
+      const cursor = carCollection
+        .find()
+        .skip(page * size)
+        .limit(size);
       const result = await cursor.toArray();
       res.send(result);
     });
