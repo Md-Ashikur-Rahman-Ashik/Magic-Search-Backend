@@ -36,6 +36,11 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/carsCount", async (req, res) => {
+      const count = await carCollection.estimatedDocumentCount();
+      res.send({ count });
+    });
+
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     console.log(
