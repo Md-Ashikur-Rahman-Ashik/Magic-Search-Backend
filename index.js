@@ -33,9 +33,17 @@ async function run() {
     app.get("/cars", async (req, res) => {
       const page = parseInt(req.query.page);
       const size = parseInt(req.query.size);
+      const filter = req?.query;
+      const query = {
+        $or: [
+          {
+            name: { $regex: filter?.search || "", $options: "i" },
+          },
+        ],
+      };
       // console.log(page, size);
       const cursor = carCollection
-        .find()
+        .find(query)
         .skip(page * size)
         .limit(size);
       const result = await cursor.toArray();
