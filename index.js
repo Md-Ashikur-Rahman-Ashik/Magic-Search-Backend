@@ -42,9 +42,11 @@ async function run() {
           },
         ],
       };
+      // console.log(filter.newest);
       const options = {
         sort: {
           price: filter.sort === "asc" ? 1 : -1,
+          creationDate: -1,
         },
       };
       // console.log(page, size);
