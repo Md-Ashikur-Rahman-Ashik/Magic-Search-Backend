@@ -34,6 +34,7 @@ async function run() {
       const page = parseInt(req.query.page);
       const size = parseInt(req.query.size);
       const filter = req?.query;
+      // console.log(filter);
       const query = {
         $or: [
           {
@@ -41,9 +42,14 @@ async function run() {
           },
         ],
       };
+      const options = {
+        sort: {
+          price: filter.sort === "asc" ? 1 : -1,
+        },
+      };
       // console.log(page, size);
       const cursor = carCollection
-        .find(query)
+        .find(query, options)
         .skip(page * size)
         .limit(size);
       const result = await cursor.toArray();
