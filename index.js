@@ -50,6 +50,10 @@ async function run() {
         query.$and.push({ brand: filter.brand });
       }
 
+      if (filter.category) {
+        query.$and.push({ category: filter.category });
+      }
+
       const sortOptions = {};
       if (filter.sort) {
         sortOptions.price = filter.sort === "asc" ? 1 : -1;
