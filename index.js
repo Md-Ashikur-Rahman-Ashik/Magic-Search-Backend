@@ -54,6 +54,30 @@ async function run() {
         query.$and.push({ category: filter.category });
       }
 
+      if (filter?.price === "first") {
+        query.$and.push({ price: { $gte: 20000, $lte: 50000 } });
+      }
+
+      if (filter?.price === "second") {
+        query.$and.push({ price: { $gte: 50000, $lte: 100000 } });
+      }
+
+      if (filter?.price === "third") {
+        query.$and.push({ price: { $gte: 100000, $lte: 200000 } });
+      }
+
+      if (filter?.price === "fourth") {
+        query.$and.push({ price: { $gte: 200000, $lte: 500000 } });
+      }
+
+      if (filter?.price === "fifth") {
+        query.$and.push({ price: { $gte: 500000, $lte: 1000000 } });
+      }
+
+      if (filter?.price === "sixth") {
+        query.$and.push({ price: { $gte: 1000000, $lte: 3500000 } });
+      }
+
       const sortOptions = {};
       if (filter.sort) {
         sortOptions.price = filter.sort === "asc" ? 1 : -1;
