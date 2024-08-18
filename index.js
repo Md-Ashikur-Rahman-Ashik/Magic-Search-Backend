@@ -67,11 +67,7 @@ async function run() {
       }
 
       if (filter?.price === "fourth") {
-        query.$and.push({ price: { $gte: 200000, $lte: 500000 } });
-      }
-
-      if (filter?.price === "fifth") {
-        query.$and.push({ price: { $gte: 500000, $lte: 1000000 } });
+        query.$and.push({ price: { $gte: 100000, $lte: 200000 } });
       }
 
       if (filter?.price === "sixth") {
