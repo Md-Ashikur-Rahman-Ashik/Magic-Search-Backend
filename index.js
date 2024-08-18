@@ -36,17 +36,19 @@ async function run() {
       const filter = req?.query;
       // console.log(filter);
       const query = {
-        $or: [
+        $and: [
           {
-            name: { $regex: filter?.search || "", $options: "i" },
+            $or: [
+              { name: { $regex: filter?.search || "", $options: "i" } },
+              { brand: filter?.brand },
+            ],
           },
         ],
       };
-      // console.log(filter.newest);
-      // const options = {
-      //   price: filter.sort === "asc" ? 1 : -1,
-      //   creationDate: filter.newest === "newest" ? -1 : 1,
-      // };
+
+      if (filter.brand) {
+        query.$and.push({ brand: filter.brand });
+      }
 
       const sortOptions = {};
       if (filter.sort) {
