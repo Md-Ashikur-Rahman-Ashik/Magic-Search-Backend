@@ -43,23 +43,23 @@ async function run() {
         ],
       };
       // console.log(filter.newest);
-      const options = [
-        {
-          $sort: {
-            price: filter.sort === "asc" ? 1 : -1,
-          },
-        },
-        {
-          $sort: {
-            creationDate: filter.newest === "newest" ? -1 : 1,
-          },
-        },
-      ];
+      // const options = {
+      //   price: filter.sort === "asc" ? 1 : -1,
+      //   creationDate: filter.newest === "newest" ? -1 : 1,
+      // };
+
+      const sortOptions = {};
+      if (filter.sort) {
+        sortOptions.price = filter.sort === "asc" ? 1 : -1;
+      }
+      if (filter.newest) {
+        sortOptions.creationDate = filter.newest === "newest" ? -1 : 1;
+      }
 
       // console.log(page, size);
       const cursor = carCollection
         .find(query)
-        .sort(options)
+        .sort(sortOptions)
         .skip(page * size)
         .limit(size);
       const result = await cursor.toArray();
