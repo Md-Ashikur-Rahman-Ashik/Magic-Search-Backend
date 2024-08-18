@@ -46,7 +46,7 @@ async function run() {
       const options = {
         sort: {
           price: filter.sort === "asc" ? 1 : -1,
-          creationDate: -1,
+          creationDate: filter.newest === "newest" ? -1 : 1,
         },
       };
       // console.log(page, size);
