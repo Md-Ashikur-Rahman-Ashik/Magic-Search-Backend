@@ -45,12 +45,12 @@ async function run() {
       // console.log(filter.newest);
       const options = [
         {
-          sort: {
+          $sort: {
             price: filter.sort === "asc" ? 1 : -1,
           },
         },
         {
-          sort: {
+          $sort: {
             creationDate: filter.newest === "newest" ? -1 : 1,
           },
         },
