@@ -43,15 +43,23 @@ async function run() {
         ],
       };
       // console.log(filter.newest);
-      const options = {
-        sort: {
-          price: filter.sort === "asc" ? 1 : -1,
-          creationDate: filter.newest === "newest" ? -1 : 1,
+      const options = [
+        {
+          sort: {
+            price: filter.sort === "asc" ? 1 : -1,
+          },
         },
-      };
+        {
+          sort: {
+            creationDate: filter.newest === "newest" ? -1 : 1,
+          },
+        },
+      ];
+
       // console.log(page, size);
       const cursor = carCollection
-        .find(query, options)
+        .find(query)
+        .sort(options)
         .skip(page * size)
         .limit(size);
       const result = await cursor.toArray();
